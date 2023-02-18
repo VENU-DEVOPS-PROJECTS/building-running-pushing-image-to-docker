@@ -9,13 +9,6 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/VENU-DEVOPS-PROJECTS/building-running-pushing-image-to-docker.git']]])
             }
         }
-        stage('Docker cache removal') {
-            steps {
-                sh 'docker stop $(docker ps -aq)'
-                sh 'docker rm $(docker ps -aq)'
-                sh 'docker rmi $(docker images -q)'
-            }
-        }
         stage('listing files') {
             steps {
                 sh 'ls -l'
