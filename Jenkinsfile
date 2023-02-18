@@ -21,17 +21,17 @@ pipeline {
         }
         stage('Building docker image from Dockerfile') {
           steps {
-                sh 'docker build -t myclockapp .'
+                sh 'docker build -t myclockapp:${BUILD_NUMBER} .'
             }
         }
         stage('Tagging image') {
            steps {
-               sh 'docker tag myclockapp venuchanapathi1998/binaryclockimage:${BUILD_NUMBER}'
+               sh 'docker tag myclockapp venuchanapathi1998/binaryclockimage'
            }
         }
         stage('Pushing to docker hub') {
             steps {
-                sh 'docker push venuchanapathi1998/binaryclockimage:${BUILD_NUMBER}'
+                sh 'docker push venuchanapathi1998/binaryclockimage'
             }
         }
         stage('Creating the Docker container from the Docker image ceated in previous stage') {
