@@ -16,13 +16,6 @@ pipeline {
                 sh 'docker --version'
             }
         }
-        stage('cleaning the loaded images') {
-            steps {
-                sh 'docker stop $(docker ps -aq)'
-                sh 'docker rm $(docker ps -aq)'
-                sh 'docker rmi $(docker images -q)'
-            }
-        }
         stage('Building docker image from Dockerfile') {
           steps {
                 sh 'docker build -t myclockapp .'
