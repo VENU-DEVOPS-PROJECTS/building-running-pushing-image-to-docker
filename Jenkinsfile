@@ -48,7 +48,7 @@ pipeline {
             steps {
                 sh 'docker stop $(docker ps -aq)'
                 sh 'docker rm $(docker ps -aq)'
-                sh 'docker rmi $(docker images -q)'
+                sh 'docker rmi -f $(docker images -q)'
             }
         }
     }
