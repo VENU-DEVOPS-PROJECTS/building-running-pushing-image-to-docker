@@ -29,6 +29,11 @@ pipeline {
                sh 'docker tag binaryclockimage:${BUILD_NUMBER} venuchanapathi1998/binaryclockimage:${BUILD_NUMBER}'
            }
         }
+        stage('Logging in') {
+            steps {
+                sh '$dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
+            }
+        }
         stage('Pushing to docker hub') {
             steps {
                 sh 'docker push venuchanapathi1998/binaryclockimage:${BUILD_NUMBER}'
