@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Creating the Docker container from the Docker image ceated in previous stage') {
           steps {
-                sh ' docker run -d --name clockapp binaryclockimage'
+                sh ' docker run -d --name clockapp binaryclockimage:${BUILD_NUMBER}'
             }
         }
         stage('cleaning the loaded images') {
