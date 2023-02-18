@@ -16,9 +16,26 @@ pipeline {
                 sh 'docker --version'
             }
         }
+        stage('cleaning the loaded images') {
+            steps {
+                sh 'docker stop $(docker ps -aq)'
+                sh 'docker rm $(docker ps -aq)'
+                sh 'docker rmi $(docker images -q)'
+            }
+        }
         stage('Building docker image from Dockerfile') {
           steps {
                 sh 'docker build -t myclockapp .'
+            }
+        }
+        stage('Tagging image') {
+           steps {
+               sh 'docker tag myclockapp venuchanapathi1998/binaryclockimage:${BUILD_NUMBER}'
+           }
+        }
+        stage('Pushing to docker hub') {
+            steps {
+                sh 'docker push venuchanapathi1998/binaryclockimage:${BUILD_NUMBER}'
             }
         }
         stage('Creating the Docker container from the Docker image ceated in previous stage') {
