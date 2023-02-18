@@ -21,12 +21,12 @@ pipeline {
         }
         stage('Building docker image from Dockerfile') {
           steps {
-                sh 'docker build -t myclockapp:${BUILD_NUMBER} .'
+                sh 'docker build -t binaryclockimage:${BUILD_NUMBER} .'
             }
         }
         stage('Tagging image') {
            steps {
-               sh 'docker tag myclockapp:${BUILD_NUMBER} venuchanapathi1998/binaryclockimage:${BUILD_NUMBER}'
+               sh 'docker tag binaryclockimage:${BUILD_NUMBER} venuchanapathi1998/binaryclockimage:${BUILD_NUMBER}'
            }
         }
         stage('Pushing to docker hub') {
@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Creating the Docker container from the Docker image ceated in previous stage') {
           steps {
-                sh ' docker run -d --name clockapp myclockapp'
+                sh ' docker run -d --name clockapp binaryclockimage'
             }
         }
         stage('cleaning the loaded images') {
